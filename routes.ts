@@ -8,7 +8,8 @@ export const publicRoutes: string[] = [
   "/",
   "/auth/new-verification",
   "/api/upload",
-  "/categories/",
+  "/categories/*",
+  "/products/*",
 ];
 
 /**
@@ -54,4 +55,5 @@ export const apiAuthPrefix: string = "/api/auth";
  * @name DefaultRedirectAfterLogin
  * @type {string}
  */
-export const DefaultRedirectAfterLogin: string = "/settings?redirected_from=login";
+export const DefaultRedirectAfterLogin: string =
+  "/settings?redirected_from=login";
