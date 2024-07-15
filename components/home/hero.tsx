@@ -29,7 +29,11 @@ const HeroSection = () => {
           <Link href="/categories/">
             <Button>See Categories</Button>
           </Link>
-          {!user && <Button>Login</Button>}
+          {!user && (
+            <Link href="/login">
+              <Button className="px-10">Login</Button>
+            </Link>
+          )}
         </div>
       </div>
       <div className="w-full md:w-1/2 flex mt-20 md:mt-0 justify-center items-center">

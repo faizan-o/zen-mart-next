@@ -4,7 +4,7 @@ import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 const ErrorCard = (): JSX.Element => {
   return (
     <CardWrapper
-      headerLabel="OOPS! Something Went Wrong!"
+      headerHeading="OOPS! Something Went Wrong!"
       backButtonLabel="Back To Login"
       backButtonHref="/auth/login"
     >

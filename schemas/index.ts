@@ -1,5 +1,27 @@
 import * as z from "zod";
 
+export const ContactUsSchema = z.object({
+  name: z.string().min(3, "Name Is Required"),
+  email: z.string().email(),
+  message: z.string(),
+});
+
+export const CheckoutSchema = z.object({
+  customerName: z.string().min(5, "Customer Name Is Required"),
+  customerEmail: z.string().email(),
+  customerCountry: z.string().min(4, "Country Name Is Required"),
+  customerState: z.string().min(4, "State Is Required"),
+  customerZipCode: z.string().min(5, "ZipCode Is Required"),
+  customerCity: z.string().min(3, "City Name Is Required"),
+  customerAddress: z.string().min(12, "Please Provide Max Address"),
+  customerPhoneNumber: z.string(),
+  paymentMethod: z
+    .enum(["CashOnDelivery", "OnlinePayment"])
+    .default("OnlinePayment"),
+  hasBeenPaid: z.boolean().default(false),
+  totalPrice: z.number(),
+});
+
 export const NewCampaignSchema = z.object({
   name: z.string(),
   image: z.string().optional(),

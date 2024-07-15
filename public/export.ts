@@ -7,6 +7,10 @@ import promiseCard3 from "./promise-card-3.png";
 import promiseCard4 from "./promise-card-4.png";
 import promiseCard5 from "./promise-card-5.png";
 import promiseCard6 from "./promise-card-6.png";
+import AboutImage1 from "./AboutImage1.webp";
+import AboutImage2 from "./AboutImage2.webp";
+import AboutImage3 from "./AboutImage3.webp";
+import AboutImage4 from "./AboutImage4.webp";
 
 export {
   logo,
@@ -18,4 +22,8 @@ export {
   promiseCard4,
   promiseCard5,
   promiseCard6,
+  AboutImage1,
+  AboutImage2,
+  AboutImage3,
+  AboutImage4,
 };

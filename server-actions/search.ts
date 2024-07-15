@@ -8,6 +8,7 @@ export const searchProducts = async (
   query: string
 ): Promise<SearchProductRespone[] | null> => {
   try {
+    if (!query) return null;
     const products = await db.product.findMany({
       where: {
         OR: [
@@ -27,6 +28,14 @@ export const searchProducts = async (
             description: {
               contains: query,
               mode: "insensitive",
+            },
+          },
+          {
+            category: {
+              type: {
+                contains: query,
+                mode: "insensitive",
+              },
             },
           },
         ],

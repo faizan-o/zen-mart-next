@@ -16,7 +16,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-import { FaHome, FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaHome, FaReceipt, FaShoppingCart, FaUser } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
 import { BsFillGearFill, BsInfoCircleFill } from "react-icons/bs";
 import { RiContactsBook3Fill, RiHeartAddFill } from "react-icons/ri";
@@ -25,7 +25,9 @@ import { AvatarFallback } from "@radix-ui/react-avatar";
 import { FiLogOut } from "react-icons/fi";
 import { signOutUser } from "@/server-actions/sign-out-user";
 import { useRouter } from "next/navigation";
-import SearchProductInput from "./search-product-input";
+import SearchProductInput from "./search-products-input/search-product-input";
+import { toast } from "sonner";
+import { MdDashboard } from "react-icons/md";
 
 const Navbar = () => {
   const isAdmin = useCurrentRole() === "ADMIN";
@@ -61,11 +63,20 @@ const Navbar = () => {
                       <FaUser className="text-3xl" />
                     )}
                     <div className="flex flex-col">
-                      <h1 className="font-semibold">{user?.name}</h1>
-                      <p className="text-[12px] text-gray-400">{user?.email}</p>
+                      <h1 className="font-semibold">
+                        {user ? user.name : "Welcome, To Zenmart"}
+                      </h1>
+                      <p className="text-[12px] text-gray-400">
+                        {user ? user?.email : "Please Login To Purchase"}
+                      </p>
                     </div>
                   </div>
                 </SheetHeader>
+                <div className="w-full h-[2px] rounded-full bg-gray-800" />
+
+                <div className="w-full py-4 px-2 max-w-[24rem]">
+                  <SearchProductInput />
+                </div>
                 <div className="w-full h-[2px] rounded-full bg-gray-800" />
                 <div className="py-5">
                   <Link href="/">
@@ -102,6 +113,14 @@ const Navbar = () => {
                           <h1 className="font-regular">Wishlist</h1>
                         </div>
                       </Link>
+                      <Link href="/orders">
+                        <div className="flex items-center gap-5 rounded-md hover:bg-gray-700 py-4 pl-5">
+                          <div>
+                            <FaReceipt />
+                          </div>
+                          <h1 className="font-regular">My Orders</h1>
+                        </div>
+                      </Link>
                     </>
                   )}
                   <Link href="/about">
@@ -130,6 +149,17 @@ const Navbar = () => {
                 )}
                 {user && (
                   <>
+                    {isAdmin && (
+                      <Link href="/dashboard">
+                        <Button
+                          variant="secondary"
+                          className="mt-5 w-full space-x-1"
+                        >
+                          <MdDashboard />
+                          <h1>Dashboard</h1>
+                        </Button>
+                      </Link>
+                    )}
                     <Link href="/settings">
                       <Button
                         variant="secondary"
@@ -141,8 +171,10 @@ const Navbar = () => {
                     </Link>
                     <Button
                       onClick={async (_) => {
+                        toast("Logging You Out");
                         await signOutUser();
-                        router.push("/");
+                        window.location.replace("/");
+                        toast("You Are Logged Out");
                       }}
                       variant="secondary"
                       className="mt-5 w-full space-x-2"
@@ -157,14 +189,6 @@ const Navbar = () => {
           </div>
           <h1 className="font-bold text-3xl">ZenMart</h1>
         </div>
-        <div className="hidden w-full px-2 max-w-[24rem] md:block">
-          <SearchProductInput />
-        </div>
-        {isAdmin && (
-          <Link href="/admin/dashboard">
-            <Button>Go To Dashboard</Button>
-          </Link>
-        )}
       </nav>
     </header>
   );

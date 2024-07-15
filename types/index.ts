@@ -1,4 +1,5 @@
 import { Category, Product } from "@prisma/client";
+import { StaticImageData } from "next/image";
 
 export type ResponseData = {
   error?: string;
@@ -56,8 +57,27 @@ export type CheckOutProduct = {
   quantity: number;
 };
 
+export type CartProduct = Product & {
+  quantity: number;
+};
+
 export interface MapAddress {
   longitude: number;
-  lattitude: number;
+  latitude: number;
   zoom: number;
+}
+
+export interface AnalyticalCounts {
+  productsCount: number;
+  categoriesCount: number;
+  usersCount: number;
+  campaignsCount: number;
+  ordersCount: number;
+  revenue: number;
+}
+
+export interface CategoryRevenue {
+  categoryName: string;
+  revenue: number;
+  productCount: number;
 }

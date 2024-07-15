@@ -1,12 +1,6 @@
 "use client";
 
-import React, {
-  ChangeEvent,
-  useEffect,
-  useRef,
-  useState,
-  useTransition,
-} from "react";
+import { ChangeEvent, useEffect, useRef, useState, useTransition } from "react";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -144,7 +138,9 @@ const ProductsDashboard = () => {
         <div className="border-[1px] mt-2 rounded-md border-gray-700 flex justify-between px-5 py-10">
           <h1 className="text-3xl font-bold">Products</h1>
           <DialogTrigger asChild>
-            <Button variant="default" className="font-semibold">Add Product</Button>
+            <Button variant="default" className="font-semibold">
+              Add Product
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[500px] overflow-y-auto max-h-screen">
             <DialogTitle className="hidden">New Product</DialogTitle>

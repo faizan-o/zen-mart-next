@@ -151,7 +151,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="border-t-2 border-gray-800">
-        <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+        <div className="container mx-auto py-5 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className="text-gray-500 text-sm text-center sm:text-left">
             © 2024 ZenMart —
             <a

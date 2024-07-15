@@ -1,0 +1,7 @@
+.search-input-products-section {
+  display: none;
+}
+
+.search-input-wrapper:focus-within .search-input-products-section {
+  display: block;
+}

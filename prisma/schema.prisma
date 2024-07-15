@@ -23,6 +23,11 @@ enum PriceConditions {
   GREATERTHAN
 }
 
+enum PaymentMethods {
+  CashOnDelivery
+  OnlinePayment
+}
+
 type OrderProduct {
   id String @db.ObjectId
   quantity Int
@@ -138,9 +143,18 @@ model Order {
   customerId String
   customerName String
   customerEmail String
+  customerCountry String
+  customerState String
+  customerZipCode String
+  customerCity String
   customerAddress String
   customerPhoneNumber String
-  isDelivered Boolean
+  paymentMethod PaymentMethods @default(OnlinePayment)
+  hasBeenPaid Boolean
+  isDelivered Boolean @default(false)
+  createdAt DateTime @default(now()) @db.Timestamp
+  estimatedDeliveryTime DateTime @db.Timestamp
+  deliveredAtTime DateTime? @db.Timestamp
 
   products OrderProduct[]
   totalPrice Float

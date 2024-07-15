@@ -71,7 +71,7 @@ const CategoriesDashboard = () => {
         const data = await createCategory(values);
         setError(data?.error);
         setSuccess(data?.success);
-        fetchAllData(); // Refetch data after creating a category
+        fetchAllData();
       } catch (err) {
         setError("Something Went Wrong!");
       }
@@ -87,7 +87,7 @@ const CategoriesDashboard = () => {
         const data = await updateCategory(id, values);
         setError(data?.error);
         setSuccess(data?.success);
-        fetchAllData(); // Refetch data after updating a category
+        fetchAllData();
       } catch (err) {
         setError("Something Went Wrong!");
       }
@@ -98,7 +98,7 @@ const CategoriesDashboard = () => {
     startTransition(async () => {
       try {
         await deleteCategory(id);
-        fetchAllData(); // Refetch data after deleting a category
+        fetchAllData();
       } catch (err) {}
     });
   };

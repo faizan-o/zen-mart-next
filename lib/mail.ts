@@ -4,7 +4,7 @@ export const sendVerificationEmail = async (
   email: string,
   token: string
 ): Promise<{ isSuccess: boolean }> => {
-  const confirmationLink = `http://localhost:3000/auth/new-verification?token=${token}`;
+  const confirmationLink = `https://www.zenmart.com/auth/new-verification?token=${token}`;
   const htmlContent = `
     <body>
         <div class="container">
@@ -18,7 +18,7 @@ export const sendVerificationEmail = async (
                 <p>If you did not sign up for this account, you can ignore this email.</p>
             </div>
             <div class="footer">
-                <p>&copy; 2024 Authentication. All rights reserved.</p>
+                <p>&copy; 2024 ZenMart. All rights reserved.</p>
             </div>
         </div>
         <style>
@@ -73,13 +73,6 @@ export const sendVerificationEmail = async (
         </style>
 </body>
 `;
-
-  //   await resend.emails.send({
-  //     from: "onboarding@resend.dev",
-  //     to: email,
-  //     subject: "Confirm Your Email",
-  //     html: htmlTemplate,
-  //   });
 
   const res = await sendEmail({
     receiver: email,
@@ -94,7 +87,7 @@ export const sendResetPasswordEmail = async (
   email: string,
   token: string
 ): Promise<{ isSuccess: boolean }> => {
-  const resetPasswordLink = `http://localhost:3000/auth/new-password?token=${token}`;
+  const resetPasswordLink = `https://www.zenmart.com/auth/new-password?token=${token}`;
   const htmlContent = `
     <body>
         <div class="container">
@@ -108,7 +101,7 @@ export const sendResetPasswordEmail = async (
                 <p>If you did not request password reset, you can ignore this email.</p>
             </div>
             <div class="footer">
-                <p>&copy; 2024 Authentication. All rights reserved.</p>
+                <p>&copy; 2024 ZenMart. All rights reserved.</p>
             </div>
         </div>
         <style>
@@ -163,13 +156,6 @@ export const sendResetPasswordEmail = async (
         </style>
 </body>
 `;
-
-  //   await resend.emails.send({
-  //     from: "onboarding@resend.dev",
-  //     to: email,
-  //     subject: "Confirm Your Change Password Request",
-  //     html: htmlTemplate,
-  //   });
 
   const res = await sendEmail({
     receiver: email,
@@ -197,7 +183,7 @@ export const sendTwoFactorAuthenticationTokenEmail = async (
                 <p>If you did not request password reset, you can ignore this email.</p>
             </div>
             <div class="footer">
-                <p>&copy; 2024 Authentication. All rights reserved.</p>
+                <p>&copy; 2024 ZenMart. All rights reserved.</p>
             </div>
         </div>
         <style>
@@ -257,16 +243,93 @@ export const sendTwoFactorAuthenticationTokenEmail = async (
 </body>
 `;
 
-  //   await resend.emails.send({
-  //     from: "onboarding@resend.dev",
-  //     to: email,
-  //     subject: "Your Two Factor Authentication Code",
-  //     html: htmlTemplate,
-  //   });
-
   const res = await sendEmail({
     receiver: email,
     subject: "Two Factor Authentication Code",
+    body: htmlContent,
+  });
+  return res;
+};
+
+export const sendContactEmail = async (
+  name: string,
+  email: string,
+  message: string
+): Promise<{ isSuccess: boolean }> => {
+  const htmlContent = `
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Two Factor Authentication Code</h1>
+            </div>
+            <div class="content">
+                <p>From, ${`name <${email}>`}</p>
+                <p>${message}</p>
+            </div>
+            <div class="footer">
+                <p>&copy; 2024 ZenMart. All rights reserved.</p>
+            </div>
+        </div>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #ffffff;
+                padding: 20px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+            .code-heading {
+                font-size: 4rem;
+                font-weight: bold;
+            }
+            .header {
+                text-align: center;
+                padding: 20px 0;
+            }
+            .header h1 {
+                margin: 0;
+                font-size: 24px;
+                color: #333333;
+            }
+            .content {
+                padding: 20px;
+                text-align: left;
+            }
+            .content p {
+                font-size: 16px;
+                color: #666666;
+                line-height: 1.5;
+            }
+            .content a {
+                display: inline-block;
+                margin-top: 20px;
+                padding: 10px 20px;
+                font-size: 16px;
+                color: #ffffff;
+                background-color: #007bff;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+            .footer {
+                text-align: center;
+                padding: 20px;
+                font-size: 14px;
+                color: #999999;
+            }
+        </style>
+</body>
+`;
+
+  const res = await sendEmail({
+    receiver: "roocking.prince@gmail.com",
+    subject: "Contact Email From Customers",
     body: htmlContent,
   });
   return res;

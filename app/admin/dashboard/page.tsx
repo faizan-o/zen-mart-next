@@ -4,17 +4,6 @@ import CategoriesDashboard from "@/components/admin/categories-dashboard";
 import OrdersDashboard from "@/components/admin/orders-dashboard";
 import ProductsDashboard from "@/components/admin/products-dashboard";
 import UsersDashboard from "@/components/admin/users-dashboard";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetContent,
@@ -61,7 +50,7 @@ const DashBoardPage = () => {
   ];
 
   return (
-    <Tabs defaultValue="products" className="w-full">
+    <Tabs defaultValue="analytics" className="w-full">
       <TabsList className="hidden sm:grid w-full grid-cols-6 h-fit rounded-none">
         {DASHBOARD_TABS.map((tab: TAB) => (
           <TabsTrigger key={tab.tab} value={tab.tab} className="py-5 font-semibold">

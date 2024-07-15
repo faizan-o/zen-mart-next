@@ -2,7 +2,6 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Table,
   TableBody,
@@ -205,6 +204,10 @@ const CartPage = () => {
       </div>
       {cartProducts && cartProducts.length > 0 && (
         <div className="border-2 border-white w-full max-w-[400px] rounded-md sm:ml-auto mr-5 mx-auto px-5">
+          <div className="flex justify-between items-center py-4">
+            <h1 className="font-bold">Products</h1>
+            <h1 className="font-bold">Prices</h1>
+          </div>
           {cartProducts.map((product) => {
             const curProduct =
               products && products.find((p) => p && p.id === product.id);

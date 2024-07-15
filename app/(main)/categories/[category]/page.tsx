@@ -1,5 +1,10 @@
+import ProductCard from "@/components/product";
+import ProductsSection from "@/components/products-section";
 import { getCategoryById } from "@/data/categories";
-import { getProductById } from "@/data/products";
+import { getProductById, getProductsByCategoryId } from "@/data/products";
+import { logo } from "@/public/export";
+import { Metadata } from "next";
+import Link from "next/link";
 import React from "react";
 
 interface CategoryPageProps {
@@ -8,10 +13,36 @@ interface CategoryPageProps {
   };
 }
 
+export const generateMetadata = async ({
+  params,
+}: CategoryPageProps): Promise<Metadata> => {
+  const category = await getCategoryById(params.category);
+
+  return {
+    title: `Buy Products From ${category?.type}`,
+    description: `Discover our selection of ${category?.type} products at ZenMart`,
+    openGraph: {
+      title: `Buy Products From ${category?.type}`,
+      description: `Discover our selection of ${category?.type} products at ZenMart`,
+      images: [logo.src],
+      url: new URL(`/https://www.zenmart.vercel.app/categories/${params.category}`),
+      type: "website",
+      siteName: "ZenMart",
+    },
+  };
+};
+
 const CategoryPage = async ({ params }: CategoryPageProps) => {
   const category = await getCategoryById(params.category);
-  const products = category ? await getProductById(category.id) : null;
-  return <div>{JSON.stringify(params)}</div>;
+  const products = category
+    ? await getProductsByCategoryId(category.id, 200)
+    : null;
+  return (
+    <ProductsSection
+      category={category ? category : undefined}
+      products={products!}
+    />
+  );
 };
 
 export default CategoryPage;

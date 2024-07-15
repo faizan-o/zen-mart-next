@@ -30,7 +30,7 @@ const ProductCard = ({
             height={1080}
             alt="content"
           />
-          <h3 className="tracking-widest text-indigo-500  font-medium">
+          <h3 className="tracking-widest text-indigo-500 line-clamp-1 font-medium">
             {product.name}
           </h3>
           <h2 className="text-lg title-font mb-4 flex items-center">
