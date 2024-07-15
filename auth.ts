@@ -28,7 +28,7 @@ export const {
   },
   callbacks: {
     async signIn({ user, account }) {
-      if (account?.provider === "credentials") return true;
+      if (account?.provider !== "credentials") return true;
 
       const userId: string = user.id as string;
       const existingUser: User | null = await getUserById(userId);
