@@ -7,6 +7,7 @@ const ErrorCard = (): JSX.Element => {
       headerHeading="OOPS! Something Went Wrong!"
       backButtonLabel="Back To Login"
       backButtonHref="/auth/login"
+      className="text-center"
     >
       <div className="text-destructive w-full flex justify-center items-center">
         <ExclamationTriangleIcon className="w-10 h-10" />
