@@ -4,7 +4,7 @@ import { ABOUT_KEYWORDS } from "@/constants/seo/about";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.zenmart.vercel.app/about"),
+  metadataBase: new URL(`${process.env.BASE_URL}/about`),
   keywords: ABOUT_KEYWORDS,
   title: "About Us",
   description:
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     title: "The Story Of ZenMart | The Best Ecommerce Store",
     description:
       "Know The Story Of ZenMart By Reading Our About Us Page | The Best Ecommerce Store",
-    images: ["https://zenmart.vercel.app/AboutImage4.webp"],
-    url: new URL("https://zenmart.vercel.app/about"),
+    images: [`${process.env.BASE_URL}/AboutImage4.webp`],
+    url: new URL(`${process.env.BASE_URL}/about`),
     type: "website",
     siteName: "ZenMart",
   },

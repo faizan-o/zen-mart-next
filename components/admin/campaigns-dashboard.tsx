@@ -238,7 +238,7 @@ const CampaignsDashboard = () => {
                         <FormControl>
                           <Input
                             {...field}
-                            placeholder="http://zenmart.com/product-with-sale"
+                            placeholder={`${process.env.BASE_URL}/product-with-sale`}
                             className=""
                             type="text"
                           />

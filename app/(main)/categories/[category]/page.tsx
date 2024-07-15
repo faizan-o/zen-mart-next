@@ -24,8 +24,8 @@ export const generateMetadata = async ({
     openGraph: {
       title: `Buy Products From ${category?.type}`,
       description: `Discover our selection of ${category?.type} products at ZenMart`,
-      images: ["https://zenmart.vercel.app/logo.png"],
-      url: new URL(`/https://www.zenmart.vercel.app/categories/${params.category}`),
+      images: [`${process.env.BASE_URL}/logo.png`],
+      url: new URL(`${process.env.BASE_URL}/categories/${params.category}`),
       type: "website",
       siteName: "ZenMart",
     },

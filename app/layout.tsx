@@ -31,12 +31,6 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <head>
-        <link
-          href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.5.1/mapbox-gl.css"
-          rel="stylesheet"
-        />
-      </head>
       <SessionProvider session={session}>
         <body className={cn("vsc-initialized dark", poppins.className)}>
           <NextTopLoader

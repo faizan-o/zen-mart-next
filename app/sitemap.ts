@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllProducts, getAllProductsCount } from "../data/products";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseURL = "https://www.zenmart.com/";
+  const baseURL = process.env.BASE_URL || "";
   const products = await getAllProducts({
     start: 0,
     end: (await getAllProductsCount()) || 0,

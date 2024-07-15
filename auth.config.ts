@@ -30,7 +30,6 @@ export default {
           if (!user || !user.password) {
             return null;
           }
-
           const isPasswordCorrect = await bcrypt.compare(
             password,
             user.password

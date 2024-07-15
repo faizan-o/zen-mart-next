@@ -10,10 +10,10 @@ export const metadata: Metadata = {
     title: "Contact Us",
     description:
       "Contact Us Using Our Email Or Phone Numbers Or The Social Media Link That We Provided",
-    url: new URL("https://www.zenmart.vercel.app/contact"),
+    url: new URL(`${process.env.BASE_URL}/contact`),
     type: "website",
     siteName: "ZenMart",
-    images: ["https://zenmart.vercel.app/AboutImage3.webp"],
+    images: [`${process.env.BASE_URL}/AboutImage3.webp`],
   },
 };
 

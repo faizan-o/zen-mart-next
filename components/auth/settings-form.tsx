@@ -25,11 +25,9 @@ import FormError from "../form-error";
 import FormSuccess from "../form-success";
 import { signOutUser } from "@/server-actions/sign-out-user";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 const SettingsForm = () => {
   const currentUser = useCurrentUser();
-  const router = useRouter();
   const form = useForm<z.infer<typeof SettingsSchema>>({
     resolver: zodResolver(SettingsSchema),
     defaultValues: {
@@ -60,7 +58,6 @@ const SettingsForm = () => {
   const logout = async () => {
     toast("Signing Out");
     await signOutUser();
-    router.push("/");
   };
 
   return (

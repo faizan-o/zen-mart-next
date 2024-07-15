@@ -4,14 +4,18 @@ import { FaGithub } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
 import { DefaultRedirectAfterLogin } from "@/routes";
+import { useSearchParams } from "next/navigation";
 
 const Social = () => {
   type AuthenticationProvider = "google" | "github";
 
+  const searchParams = useSearchParams();
+  const callbackURL = searchParams.get("callbackURL");
+
   const onClickHandler = async (
     provider: AuthenticationProvider
   ): Promise<void> => {
-    await signIn(provider, { callbackUrl: DefaultRedirectAfterLogin });
+    await signIn(provider, { callbackUrl: callbackURL || DefaultRedirectAfterLogin });
   };
 
   return (

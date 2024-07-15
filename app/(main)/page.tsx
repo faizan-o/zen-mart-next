@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     title: "ZenMart - The Best Ecommerce Shopping Website",
     description:
       "The Best E-commerce Shopping Website In The World With A Wide Varirty Of Products And At Very Cheap And Low Prices",
-    images: ["https://zenmart.vercel.app/logo.png"],
+    images: [`${process.env.BASE_URL}/logo.png`],
     siteName: "ZenMart",
-    url: new URL("https://www.zenmart.com/"),
+    url: new URL(process.env.BASE_URL || ""),
     type: "website",
   },
 };

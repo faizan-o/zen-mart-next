@@ -54,7 +54,7 @@ const CheckOutPaymentCard = ({ amount, orderId }: CheckOutPaymentCardProps) => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `https://www.zenmart.com/payment-success?order=${orderId}`,
+        return_url: `${process.env.BASE_URL}/payment-success?order=${orderId}`,
       },
     });
 

@@ -26,6 +26,7 @@ import { LoginResponseData } from "@/types/index";
 
 const LoginForm = () => {
   const searchParams = useSearchParams();
+  const callbackURL = searchParams.get("callbackURL");
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
       ? "Email Already In Use With A Different Provider"
@@ -51,7 +52,7 @@ const LoginForm = () => {
     setError("");
 
     startTransition(async () => {
-      const data = await login(values);
+      const data = await login(values, callbackURL);
       if (data?.error) {
         form.reset();
         setError(data.error);

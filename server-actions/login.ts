@@ -20,7 +20,8 @@ import { db } from "@/lib/db";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 
 export const login = async (
-  values: z.infer<typeof LoginSchema>
+  values: z.infer<typeof LoginSchema>,
+  callbackURL?: string | null
 ): Promise<LoginResponseData> => {
   const validatedFields = LoginSchema.safeParse(values);
 
@@ -31,6 +32,7 @@ export const login = async (
   const { email, password, code } = validatedFields.data;
 
   const existingUser = await getUserByEmail(email);
+
 
   if (!existingUser || !existingUser.email || !existingUser.password) {
     return { error: "Credentials Don't Exist" };
@@ -92,7 +94,7 @@ export const login = async (
     const res = await signIn("credentials", {
       email,
       password,
-      redirectTo: DefaultRedirectAfterLogin,
+      redirectTo: callbackURL || DefaultRedirectAfterLogin,
     });
   } catch (err) {
     if (err instanceof AuthError) {

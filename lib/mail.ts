@@ -4,7 +4,7 @@ export const sendVerificationEmail = async (
   email: string,
   token: string
 ): Promise<{ isSuccess: boolean }> => {
-  const confirmationLink = `https://www.zenmart.com/auth/new-verification?token=${token}`;
+  const confirmationLink = `${process.env.BASE_URL}/auth/new-verification?token=${token}`;
   const htmlContent = `
     <body>
         <div class="container">
@@ -87,7 +87,7 @@ export const sendResetPasswordEmail = async (
   email: string,
   token: string
 ): Promise<{ isSuccess: boolean }> => {
-  const resetPasswordLink = `https://www.zenmart.com/auth/new-password?token=${token}`;
+  const resetPasswordLink = `${process.env.BASE_URL}/auth/new-password?token=${token}`;
   const htmlContent = `
     <body>
         <div class="container">
