@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     url: new URL("https://www.zenmart.vercel.app/contact"),
     type: "website",
     siteName: "ZenMart",
-    images: [AboutImage3.src],
+    images: ["https://zenmart.vercel.app/AboutImage3.webp"],
   },
 };
 

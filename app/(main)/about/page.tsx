@@ -1,7 +1,6 @@
 import AboutCard from "@/components/about-card";
 import { ABOUT_CARD_DATA } from "@/constants/about";
 import { ABOUT_KEYWORDS } from "@/constants/seo/about";
-import { AboutImage4 } from "@/public/export";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
     title: "The Story Of ZenMart | The Best Ecommerce Store",
     description:
       "Know The Story Of ZenMart By Reading Our About Us Page | The Best Ecommerce Store",
-    images: [AboutImage4.src],
+    images: ["https://zenmart.vercel.app/AboutImage4.webp"],
     url: new URL("https://zenmart.vercel.app/about"),
     type: "website",
     siteName: "ZenMart",
