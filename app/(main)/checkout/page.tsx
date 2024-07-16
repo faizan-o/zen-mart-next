@@ -4,6 +4,7 @@ import CardWrapper from "@/components/auth/card-wrapper";
 import CheckOutCard from "@/components/checkout/checkout-card";
 import CheckOutForm from "@/components/checkout/checkout-form";
 import { getCurrentUserCartWithProducts } from "@/data/cart";
+import { calculateTotalPrice } from "@/lib/price";
 import { cn } from "@/lib/utils";
 import { CartProduct } from "@/types";
 import React, { useEffect, useState } from "react";
@@ -16,11 +17,15 @@ const CheckOutPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  const calculateTotalPrice = (products: CartProduct[]) => {
+  const calculateCartTotalPrice = (products: CartProduct[]) => {
     return products.reduce((total, product) => {
       const { isOnSale, discount, price, quantity } = product;
-      const finalPrice =
-        isOnSale && discount ? discount * price * quantity : price * quantity;
+      const finalPrice: number = calculateTotalPrice({
+        isOnSale,
+        discount,
+        price,
+        quantity,
+      });
       return Math.ceil(total + finalPrice);
     }, 0);
   };
@@ -32,7 +37,7 @@ const CheckOutPage = () => {
       if (fetchedCartProducts && fetchedCartProducts.length > 0) {
         setAreCartProductsThere(true);
       }
-      setTotalPrice(calculateTotalPrice(fetchedCartProducts||[]));
+      setTotalPrice(calculateCartTotalPrice(fetchedCartProducts || []));
     };
 
     fetchCart();

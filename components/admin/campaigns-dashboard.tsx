@@ -49,6 +49,7 @@ import {
 } from "../ui/table";
 import FormError from "../form-error";
 import FormSuccess from "../form-success";
+import { calculateTotalPrice } from "@/lib/price";
 
 const CampaignsDashboard = () => {
   const form = useForm<z.infer<typeof NewCampaignSchema>>({
@@ -572,12 +573,11 @@ const CampaignsDashboard = () => {
                                 <TableCell>{product.name}</TableCell>
                                 <TableCell>{product.price}$</TableCell>
                                 <TableCell>
-                                  {product.discount
-                                    ? (
-                                        product.price *
-                                        (product.discount / 100)
-                                      ).toFixed(2)
-                                    : product.price}
+                                  {calculateTotalPrice({
+                                    isOnSale: !!product.discount,
+                                    discount: product.discount,
+                                    price: product.price,
+                                  })}
                                   $
                                 </TableCell>
                               </TableRow>

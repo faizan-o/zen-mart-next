@@ -1,3 +1,4 @@
+import { calculateTotalPrice } from "@/lib/price";
 import CardWrapper from "../auth/card-wrapper";
 import { CartProduct } from "@/types";
 
@@ -24,9 +25,12 @@ const CheckOutCard = ({ products, totalPrice }: { products: CartProduct[], total
               <h1 className="text-center w-full">{product.name}</h1>
               <p className="text-center w-full">{product.quantity}</p>
               <p className="text-center w-full">
-                {product.isOnSale && product.discount
-                  ? product.quantity * product.price * (product.discount / 100)
-                  : product.quantity * product.price}
+                {calculateTotalPrice({
+                  price: product.price,
+                  quantity: product.quantity,
+                  isOnSale: product.isOnSale,
+                  discount: product.discount,
+                })}
                 $
               </p>
             </div>

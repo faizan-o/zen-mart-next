@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { getCurrentUserCart } from "@/data/cart";
 import { getProductById } from "@/data/products";
+import { calculateTotalPrice } from "@/lib/price";
 import { deleteProductFromCart, updateUserCart } from "@/server-actions/cart";
 import { CheckOutProduct } from "@/types";
 import { Product } from "@prisma/client";
@@ -216,13 +217,12 @@ const CartPage = () => {
                 <div key={product.id} className="flex justify-between py-4">
                   <h1>{curProduct.name}</h1>
                   <p>
-                    {curProduct.discount
-                      ? (
-                          curProduct.price *
-                          (1 - curProduct.discount / 100) *
-                          product.quantity
-                        ).toFixed(2)
-                      : (curProduct.price * product.quantity).toFixed(2)}
+                    {calculateTotalPrice({
+                      isOnSale: curProduct.isOnSale,
+                      discount: curProduct.discount,
+                      price: curProduct.price,
+                      quantity: product.quantity,
+                    })}
                   </p>
                 </div>
               );

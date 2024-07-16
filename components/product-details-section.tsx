@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { addProductToCart } from "@/server-actions/cart";
 import { addProductToWishlist } from "@/server-actions/wishlist";
 import { useState } from "react";
+import { calculateTotalPrice } from "@/lib/price";
 
 const ProductDetailsSection = ({
   productToShowDetails,
@@ -111,10 +112,11 @@ const ProductDetailsSection = ({
                   productToShowDetails.discount && (
                     <span>
                       $
-                      {Math.ceil(
-                        productToShowDetails.price *
-                          (productToShowDetails.discount / 100)
-                      )}
+                      {calculateTotalPrice({
+                        isOnSale: productToShowDetails.isOnSale,
+                        discount: productToShowDetails.discount,
+                        price: productToShowDetails.price,
+                      })}
                     </span>
                   )}
                 <span

@@ -5,6 +5,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { calculateTotalPrice } from "@/lib/price";
 
 const ProductCard = ({
   product,
@@ -40,7 +41,12 @@ const ProductCard = ({
                   {product.discount}%
                 </Badge>
                 <span className="font-medium text-white">
-                  {Math.ceil(product.price * (product.discount / 100))}$
+                  {calculateTotalPrice({
+                    isOnSale: product.isOnSale,
+                    price: product.price,
+                    discount: product.discount,
+                  })}
+                  $
                 </span>
                 <span className="text-gray line-through text-[14px] ml-2 font-extralight">
                   {product.price}$
@@ -59,7 +65,11 @@ const ProductCard = ({
         <Button className="w-full">Buy Now</Button>
       </Link>
       {showRemoveButton && (
-        <Button onClick={removeFunction} variant="destructive" className="w-full mt-4">
+        <Button
+          onClick={removeFunction}
+          variant="destructive"
+          className="w-full mt-4"
+        >
           Remove
         </Button>
       )}
