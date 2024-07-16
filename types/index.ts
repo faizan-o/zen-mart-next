@@ -10,20 +10,26 @@ export type LoginResponseData = ResponseData & {
   isTwoFactorAuthentication?: boolean;
 };
 
-export interface FetchedUsers {
+export interface FetchedUser {
   id: string;
   name: string | null;
+  email: string | null;
   image: string | null;
   role: "ADMIN" | "USER";
   isTwoFactorEnabled: boolean;
   emailVerified: Date | null;
 }
 
-export type QueryTypes = "CATEGORIES" | "TITLE";
+// export type QueryTypes = "CATEGORIES" | "TITLE";
+
+export enum QueryTypes {
+  CATEGORIES = "CATEGORIES",
+  TITLE = "TITLE",
+}
 
 export interface Query {
   query: string;
-  type: QueryTypes;
+  type: string;
 }
 
 export interface ProductsWithIdAndName {

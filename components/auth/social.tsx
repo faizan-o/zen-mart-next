@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
-import { DefaultRedirectAfterLogin } from "@/routes";
+import { DefaultRedirectAfterLogin } from "@/constants/routes";
 import { useSearchParams } from "next/navigation";
 
 const Social = () => {
@@ -15,7 +15,9 @@ const Social = () => {
   const onClickHandler = async (
     provider: AuthenticationProvider
   ): Promise<void> => {
-    await signIn(provider, { callbackUrl: callbackURL || DefaultRedirectAfterLogin });
+    await signIn(provider, {
+      callbackUrl: callbackURL || DefaultRedirectAfterLogin,
+    });
   };
 
   return (

@@ -8,16 +8,16 @@ import {
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
-} from "../ui/pagination";
+} from "../../ui/pagination";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "../ui/collapsible";
+} from "../../ui/collapsible";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { BarLoader, ScaleLoader } from "react-spinners";
 import { getAllOrders, getAllOrdersCount } from "@/data/orders";
-import { Switch } from "../ui/switch";
+import { Switch } from "../../ui/switch";
 import { toogleCurrentOrderDelivered } from "@/server-actions/order";
 import { toast } from "sonner";
 import { MdPending } from "react-icons/md";
@@ -56,7 +56,11 @@ const OrdersSection = () => {
       >
         <div className="w-full flex justify-between items-center">
           <div className="flex items-center space-x-5">
-          {order.isDelivered ? <FaCheckCircle className="text-2xl" /> : <MdPending />}
+            {order.isDelivered ? (
+              <FaCheckCircle className="text-2xl" />
+            ) : (
+              <MdPending />
+            )}
             <div>
               <h1>{order.id}</h1>
               <p className="text-[12px] font-semibold text-gray-500 w-[70%]">
@@ -113,7 +117,7 @@ const OrdersSection = () => {
             <h1 className="font-semibold">IsDelivered</h1>
             <Switch
               checked={order.isDelivered}
-              onCheckedChange={(e) =>
+              onCheckedChange={() =>
                 toogleOrderDelivered({
                   current: order.isDelivered,
                   id: order.id,

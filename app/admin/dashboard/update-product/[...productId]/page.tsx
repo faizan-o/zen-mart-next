@@ -1,6 +1,7 @@
 "use client";
 
 import CardWrapper from "@/components/auth/card-wrapper";
+import CustomFormInput from "@/components/custom-form-input";
 import FormError from "@/components/form-error";
 import FormSuccess from "@/components/form-success";
 import { Button } from "@/components/ui/button";
@@ -42,6 +43,8 @@ const EditProductPage = () => {
   const [isSubmitPending, startTransition] = useTransition();
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
   const [categories, setCategories] = useState<Category[] | null>(null);
+  const categoryFieldOptions =
+    categories && categories.map((c) => ({ label: c.type, value: c.id }));
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
 
@@ -107,130 +110,64 @@ const EditProductPage = () => {
         headerLabel="Edit Current Product"
         backButtonLabel="Back To Dashboard"
         backButtonHref="/admin/dashboard"
+        className="max-h-full overflow-y-auto"
       >
         <Form {...form}>
           <form
             className="mt-2 space-y-4"
             onSubmit={form.handleSubmit(onEditProductFormSubmit)}
           >
-            <FormField
-              control={form.control}
-              disabled={isSubmitPending}
+            <CustomFormInput
+              formControl={form.control}
               name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} type="text" placeholder="Product Name" />
-                  </FormControl>
-                </FormItem>
-              )}
+              label="Name"
+              isSubmitPending={isSubmitPending}
+              inputPlaceHolder="Product Name"
+              inputType="TEXT_INPUT"
             />
-            <FormField
-              control={form.control}
-              disabled={isSubmitPending}
+            <CustomFormInput
+              formControl={form.control}
               name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      placeholder="Product Description"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
+              label="Description"
+              isSubmitPending={isSubmitPending}
+              inputPlaceHolder="Product Description"
+              inputType="TEXT_INPUT"
             />
-            <FormField
-              control={form.control}
+            <CustomFormInput
+              formControl={form.control}
               name="price"
-              disabled={isSubmitPending}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Price</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      placeholder="Product Price In $"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
+              label="Price"
+              isSubmitPending={isSubmitPending}
+              inputPlaceHolder="Product Price ($)"
+              inputType="TEXT_INPUT"
             />
-            <FormField
-              control={form.control}
+            <CustomFormInput
+              formControl={form.control}
+              inputType="SWITCH"
+              isSubmitPending={isSubmitPending}
+              label="Is On Sale"
+              inputDescription="Set Wether The Product Will Have The Given Discount"
               name="isOnSale"
-              disabled={isSubmitPending}
-              render={({ field }) => (
-                <FormItem className="flex justify-between border-[1px] border-gray-700 p-3 rounded-md">
-                  <div className="">
-                    <FormLabel>Is On Sale</FormLabel>
-                    <FormDescription className="w-3/4">
-                      Set The Product On Sale If You Want To Give Discount
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      onCheckedChange={field.onChange}
-                      checked={field.value}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
             />
-            <div className="flex w-full justify-around">
-              {isOnSale && (
-                <FormField
-                  control={form.control}
-                  name="discount"
-                  disabled={isSubmitPending}
-                  render={({ field }) => (
-                    <FormItem className="w-1/2">
-                      <FormLabel>Discount</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          type="text"
-                          placeholder="Discount In %"
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              )}
-              <FormField
-                control={form.control}
-                name="categoryId"
-                disabled={isSubmitPending}
-                render={({ field }) => (
-                  <FormItem className={`${isOnSale ? "w-1/2" : "w-full"}`}>
-                    <FormLabel>Category</FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            {categories?.map((category) => (
-                              <SelectItem key={category.id} value={category.id}>
-                                {category.type}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </FormItem>
-                )}
+            {isOnSale && (
+              <CustomFormInput
+                formControl={form.control}
+                inputType="TEXT_INPUT"
+                isSubmitPending={isSubmitPending}
+                label="Discount"
+                inputPlaceHolder="Discount In %"
+                name="discount"
               />
-            </div>
+            )}
+            <CustomFormInput
+              formControl={form.control}
+              name="categoryId"
+              isSubmitPending={isSubmitPending}
+              label="Category"
+              inputType="SELECT"
+              options={categoryFieldOptions || []}
+              inputPlaceHolder="Select A Category"
+            />
             <FormError message={error} />
             <FormSuccess message={success} />
             <Button type="submit" className="w-full" disabled={isSubmitPending}>

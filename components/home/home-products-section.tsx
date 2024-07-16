@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ProductCard from "../product";
 import { Product } from "@prisma/client";
 import SkeletonCard from "../skeleton-card";
+import { HOME_SECTION_HEADING } from "@/constants/home";
 
 const ProductsSection = () => {
   const [salesProducts, setSalesProducts] = useState<Product[] | null>(null);
@@ -21,7 +22,7 @@ const ProductsSection = () => {
   return (
     <section className="text-gray-600">
       <h1 className="mt-20 text-3xl pl-4 text-white font-bold">
-        Top Current Sales
+        {HOME_SECTION_HEADING}
       </h1>
       <div className="container pt-4 pb-10 w-full">
         {salesProducts && (

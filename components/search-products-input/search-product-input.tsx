@@ -7,7 +7,7 @@ import "./search-product.css";
 import Link from "next/link";
 import Image from "next/image";
 
-const SearcProductInput = () => {
+const SearchProductInput = () => {
   const [query, setQuery] = useState<string>("");
   const [queriedProducts, setQueriedProducts] = useState<
     SearchProductRespone[] | null
@@ -33,7 +33,7 @@ const SearcProductInput = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      {queriedProducts ? (
+      {queriedProducts && queriedProducts.length > 0 ? (
         <div className="search-input-products-section">
           {queriedProducts.map((product: SearchProductRespone) => (
             <Link href={`/product/${product.id}`} key={product.id}>
@@ -55,9 +55,16 @@ const SearcProductInput = () => {
             </Link>
           ))}
         </div>
-      ) : null}
+      ) : (
+        queriedProducts &&
+        queriedProducts?.length < 1 && (
+          <div>
+            <h1 className="text-center pt-5">No Products Found</h1>
+          </div>
+        )
+      )}
     </div>
   );
 };
 
-export default SearcProductInput;
+export default SearchProductInput;

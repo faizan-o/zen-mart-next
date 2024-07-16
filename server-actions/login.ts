@@ -9,7 +9,7 @@ import {
   generateTwoFactorToken,
   generateVerificationToken,
 } from "@/lib/tokens";
-import { DefaultRedirectAfterLogin } from "@/routes";
+import { DefaultRedirectAfterLogin } from "@/constants/routes";
 import { LoginSchema } from "@/schemas";
 import type { VerificationToken } from "@prisma/client";
 import { AuthError } from "next-auth";
@@ -32,7 +32,6 @@ export const login = async (
   const { email, password, code } = validatedFields.data;
 
   const existingUser = await getUserByEmail(email);
-
 
   if (!existingUser || !existingUser.email || !existingUser.password) {
     return { error: "Credentials Don't Exist" };

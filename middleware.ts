@@ -6,7 +6,7 @@ import {
   apiAuthPrefix,
   DefaultRedirectAfterLogin,
   adminRoutes,
-} from "./routes";
+} from "./constants/routes";
 import type { NextRequest } from "next/server";
 import type { Session } from "next-auth";
 import { currentRole } from "./server-actions/use-current-role";
@@ -30,10 +30,9 @@ export default auth(async (req) => {
     return;
   }
   if (!isLoggedIn && !isPublicRoute) {
-
     let callBackUrl = nextUrl.pathname;
 
-    if (nextUrl.search){
+    if (nextUrl.search) {
       callBackUrl += nextUrl.search;
     }
 

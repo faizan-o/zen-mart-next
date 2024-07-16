@@ -1,9 +1,3 @@
-import AnalyticsDashboard from "@/components/admin/analytics-dashboard";
-import CampaignsDashboard from "@/components/admin/campaigns-dashboard";
-import CategoriesDashboard from "@/components/admin/categories-dashboard";
-import OrdersDashboard from "@/components/admin/orders-dashboard";
-import ProductsDashboard from "@/components/admin/products-dashboard";
-import UsersDashboard from "@/components/admin/users-dashboard";
 import {
   Sheet,
   SheetContent,
@@ -11,49 +5,21 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { DASHBOARD_TABS, SIDEBAR_HEADER } from "@/constants/dashboard";
+import { T_DASHBOARD_TAB } from "@/types/constant-types";
 import { capitalizeFirstLetter } from "@/utils/string-function";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const DashBoardPage = () => {
-  type TAB = { tab: string; name: string; component: React.FC };
-  const DASHBOARD_TABS: TAB[] = [
-    {
-      tab: "analytics",
-      name: "Analytics",
-      component: AnalyticsDashboard,
-    },
-    {
-      tab: "users",
-      name: "Users",
-      component: UsersDashboard,
-    },
-    {
-      tab: "products",
-      name: "Products",
-      component: ProductsDashboard,
-    },
-    {
-      tab: "categories",
-      name: "Categories",
-      component: CategoriesDashboard,
-    },
-    {
-      tab: "campaigns",
-      name: "Campaigns",
-      component: CampaignsDashboard,
-    },
-    {
-      tab: "orders",
-      name: "Orders",
-      component: OrdersDashboard,
-    },
-  ];
-
   return (
     <Tabs defaultValue="analytics" className="w-full">
       <TabsList className="hidden sm:grid w-full grid-cols-6 h-fit rounded-none">
-        {DASHBOARD_TABS.map((tab: TAB) => (
-          <TabsTrigger key={tab.tab} value={tab.tab} className="py-5 font-semibold">
+        {DASHBOARD_TABS.map((tab: T_DASHBOARD_TAB) => (
+          <TabsTrigger
+            key={tab.tab}
+            value={tab.tab}
+            className="py-5 font-semibold"
+          >
             {capitalizeFirstLetter(tab.name)}
           </TabsTrigger>
         ))}
@@ -70,10 +36,10 @@ const DashBoardPage = () => {
             className="max-h-screen overflow-y-auto bg-gray-900"
           >
             <SheetHeader className="text-3xl py-5 font-bold">
-              Dashboard Tabs
+              {SIDEBAR_HEADER}
             </SheetHeader>
             <TabsList className="grid grid-cols-1 bg-gray-900 space-y-8">
-              {DASHBOARD_TABS.map((tab: TAB) => (
+              {DASHBOARD_TABS.map((tab: T_DASHBOARD_TAB) => (
                 <TabsTrigger
                   key={tab.tab}
                   value={tab.tab}
@@ -86,7 +52,7 @@ const DashBoardPage = () => {
           </SheetContent>
         </Sheet>
       </div>
-      {DASHBOARD_TABS.map((tab: TAB) => {
+      {DASHBOARD_TABS.map((tab: T_DASHBOARD_TAB) => {
         const Component = tab.component;
         return (
           <TabsContent key={tab.tab} value={tab.tab}>

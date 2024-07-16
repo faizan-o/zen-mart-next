@@ -11,7 +11,7 @@ const ProductsSection = ({
   products,
   heading,
 }: {
-  isWholeCategoryPage?:boolean
+  isWholeCategoryPage?: boolean;
   category?: Category;
   heading?: string;
   products: Product[];
@@ -22,7 +22,13 @@ const ProductsSection = ({
         <div className="my-20 flex justify-between items-center px-5 md:px-10">
           <h1 className="text-3xl text-white font-bold">{category.type}</h1>
           <div className="">
-            <Link href={isWholeCategoryPage ? `/categories/${category.id}` : '/categories/'}>
+            <Link
+              href={
+                !isWholeCategoryPage
+                  ? `/categories/${category.id}`
+                  : "/categories/"
+              }
+            >
               <Button className="px-7">See All</Button>
             </Link>
           </div>
