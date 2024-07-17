@@ -28,7 +28,7 @@ const HeroSection = () => {
             <Button>{HERO.category_button}</Button>
           </Link>
           {!user && (
-            <Link href="/login">
+            <Link href="auth/login">
               <Button className="px-10">{HERO.login_button}</Button>
             </Link>
           )}

@@ -101,7 +101,7 @@ export const Sidebar = () => {
             onClick={async (_) => {
               toast("Logging You Out");
               await signOutUser();
-              window.location.replace("/login");
+              window.location.replace("auth/login");
               toast("You Are Logged Out");
             }}
             variant="secondary"

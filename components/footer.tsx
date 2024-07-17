@@ -124,7 +124,7 @@ const Footer = () => {
             <nav className="list-none mb-10">
               <li>
                 <Link
-                  href="/login"
+                  href="auth/login"
                   className="text-gray-600 hover:text-gray-800"
                 >
                   Login
@@ -132,7 +132,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/register"
+                  href="auth/register"
                   className="text-gray-600 hover:text-gray-800"
                 >
                   Regsiter
