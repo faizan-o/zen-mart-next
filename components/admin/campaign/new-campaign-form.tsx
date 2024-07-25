@@ -169,14 +169,6 @@ const NewCampaignForm = ({
           <CustomFormInput
             formControl={form.control}
             name="typeCondition"
-            label="Discount To Set"
-            isSubmitPending={isSubmitPending}
-            inputPlaceHolder="23 in %"
-            inputType="TEXT_INPUT"
-          />
-          <CustomFormInput
-            formControl={form.control}
-            name="typeCondition"
             label="Condition Type"
             isSubmitPending={isSubmitPending}
             inputType="SELECT"
