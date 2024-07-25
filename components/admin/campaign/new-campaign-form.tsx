@@ -74,7 +74,7 @@ const NewCampaignForm = ({
       value: product.id,
       label: product.name,
     }));
-  }, [categories]);
+  }, [products]);
 
   const campaignType = form.watch("typeCondition");
 
