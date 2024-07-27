@@ -1,6 +1,6 @@
 import { FaUser } from "react-icons/fa6";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
+import { SheetContent, SheetHeader, SheetTitle, SheetClose } from "./ui/sheet";
 import { NAVBAR_BUTTONS, NAVBAR_LINKS, NAVBAR_TITLE } from "@/constants/navbar";
 import LoginButton from "./auth/login-button";
 import RegisterButton from "./auth/register-button";
@@ -69,7 +69,9 @@ export const Sidebar = () => {
       <div className="w-full h-[2px] rounded-full bg-gray-800" />
       <div className="py-5">
         {NAVBAR_LINKS.map((nav_link, idx) => (
-          <LINK key={idx} {...nav_link} />
+          <SheetClose>
+            <LINK key={idx} {...nav_link} />
+          </SheetClose>
         ))}
       </div>
       <div className="w-full h-[2px] rounded-full bg-gray-800" />
