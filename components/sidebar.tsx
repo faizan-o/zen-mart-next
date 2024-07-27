@@ -67,7 +67,7 @@ export const Sidebar = () => {
         <SearchProductInput />
       </div>
       <div className="w-full h-[2px] rounded-full bg-gray-800" />
-      <div className="py-5">
+      <div className="py-5 flex flex-col justify-start items-center">
         {NAVBAR_LINKS.map((nav_link, idx) => (
           <SheetClose>
             <LINK key={idx} {...nav_link} />
