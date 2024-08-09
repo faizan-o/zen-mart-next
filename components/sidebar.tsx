@@ -27,7 +27,7 @@ export const Sidebar = () => {
 
     return (
       <Link href={href}>
-        <div className="flex items-center gap-5 rounded-md hover:bg-gray-700 py-4 pl-5">
+        <div className="flex items-center gap-5 rounded-md hover:bg-gray-700 py-4 pl-5 w-full">
           <div>
             <Icon />
           </div>
