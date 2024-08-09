@@ -69,7 +69,7 @@ export const Sidebar = () => {
       <div className="w-full h-[2px] rounded-full bg-gray-800" />
       <div className="py-5 flex flex-col justify-center items-start">
         {NAVBAR_LINKS.map((nav_link, idx) => (
-          <SheetClose key={idx}>
+          <SheetClose key={idx} className="w-full">
             <LINK {...nav_link} />
           </SheetClose>
         ))}
