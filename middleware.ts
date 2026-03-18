@@ -79,11 +79,16 @@ export async function middleware(req: NextRequest) {
     if (!isAdmin) return NextResponse.redirect(new URL("/", req.url));
   }
 
-  // 9️⃣ Allow everything else
+  // 9️⃣ Allow logged-in users to access private routes
+  if (isLoggedIn && !isPublicRoute && !isAuthRoute) {
+    return NextResponse.next();
+  }
+
+  // 🔟 Allow everything else
   return NextResponse.next();
 }
 
-//  🔧 Apply middleware to all pages except _next/static files
+//  🔧 Apply middleware to all pages except _next/static, _next/image, and favicon
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };
