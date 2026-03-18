@@ -17,14 +17,15 @@ if (!process.env.NEXTAUTH_SECRET) {
 }
 
 // Use known session cookie/salt name for Auth.js
-const TOKEN_SALT = process.env.NODE_ENV === "production"
-  ? "__Secure-authjs.session-token"
-  : "authjs.session-token";
+const TOKEN_SALT =
+  process.env.NODE_ENV === "production"
+    ? "__Secure-authjs.session-token"
+    : "authjs.session-token";
 
 export async function middleware(req: NextRequest) {
   const { nextUrl } = req;
 
-  // Check login status
+  // 1️⃣ Get login status
   let isLoggedIn = false;
   try {
     const token = await getToken({
@@ -33,17 +34,17 @@ export async function middleware(req: NextRequest) {
       salt: TOKEN_SALT,
     });
     isLoggedIn = !!token;
-  } catch (e) {
+  } catch {
     isLoggedIn = false;
   }
 
-  // Routing flags
+  // 2️⃣ Route checks
   const isAuthAPIRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
 
-  // Role check (only if admin route)
+  // 3️⃣ Role check (only if admin route)
   let isAdmin = false;
   if (isAdminRoute && isLoggedIn) {
     try {
@@ -53,31 +54,36 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  // Allow API/auth prefix
+  // 4️⃣ Allow API/auth routes to proceed
   if (isAuthAPIRoute) return NextResponse.next();
 
-  // Redirect logged in users away from auth pages
+  // 5️⃣ Allow public routes
+  if (isPublicRoute) return NextResponse.next();
+
+  // 6️⃣ Redirect logged-in users away from auth pages
   if (isAuthRoute && isLoggedIn) {
     return NextResponse.redirect(new URL(DefaultRedirectAfterLogin, req.url));
   }
 
-  // Redirect unauthenticated to login
-  if (!isLoggedIn && !isPublicRoute) {
+  // 7️⃣ Redirect unauthenticated users to login (avoid loop)
+  if (!isLoggedIn && !isPublicRoute && nextUrl.pathname !== "/auth/login") {
     const callBackUrl = encodeURIComponent(nextUrl.pathname + nextUrl.search);
     return NextResponse.redirect(
-      new URL(`/auth/login?callbackURL=${callBackUrl}`, req.url),
+      new URL(`/auth/login?callbackURL=${callBackUrl}`, req.url)
     );
   }
 
-  // Admin routes protection
+  // 8️⃣ Admin routes protection
   if (isAdminRoute) {
     if (!isLoggedIn) return NextResponse.redirect(new URL("/auth/login", req.url));
     if (!isAdmin) return NextResponse.redirect(new URL("/", req.url));
   }
 
+  // 9️⃣ Allow everything else
   return NextResponse.next();
 }
 
+//  🔧 Apply middleware to all pages except _next/static files
 export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };
